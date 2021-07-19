@@ -1,0 +1,20 @@
+{
+  "totalSize": 2,
+  "done": true,
+  "records": [
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v51.0/sobjects/Contact/00309000006nYPoAAM"
+      },
+      "Id": "00309000006nYPoAAM"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v51.0/sobjects/Contact/00309000006nYQ7AAM"
+      },
+      "Id": "00309000006nYQ7AAM"
+    }
+  ]
+}

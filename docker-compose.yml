@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:13.2
+    container_name: salesforce-sync-db
+    environment:
+      POSTGRES_DB: salesforce-sync
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+    - 5432:5432
+  app:
+    image: sync-app:latest
+    build:
+      context: .
+    container_name: salesforce-sync-app
+    ports:
+      - 8080:8080
+    depends_on:
+      - db

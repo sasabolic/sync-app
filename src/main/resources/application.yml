@@ -1,0 +1,48 @@
+# ==============================================================
+# SYNC APP CONFIGURATION
+# ==============================================================
+sync:
+  app:
+    postpone_offset: 1h
+    sync_on_offset: 5s
+    customer_sync_limit: 2
+
+# ==============================================================
+# ADAPTER CONFIGURATION
+# ==============================================================
+
+# Scheduler
+scheduler.cron: "0 */5 * * * *"
+
+# Postgres
+spring.r2dbc:
+  url: r2dbc:postgresql://${VRS_POSTGRES:localhost}:5432/salesforce-sync
+  username: postgres
+  password: password
+
+spring.flyway:
+  url: jdbc:postgresql://${VRS_POSTGRES:localhost}:5432/salesforce-sync
+  user: ${spring.r2dbc.username}
+  password: ${spring.r2dbc.password}
+
+# Salesforce
+salesforce:
+  client:
+    connection_timout_limit: 1m
+    read_timeout_limit: 1m
+    connection_keep_alive: false
+    compressionn_enabled: true
+    buffer_limit: 16
+    retry:
+      max_attempts: 3
+      min_backoff: 5s
+    oauth:
+      token_url: "https://login.salesforce.com/services/oauth2/token"
+      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer"
+    jwt:
+      audience: "https://login.salesforce.com"
+      expiration: 1d
+      private_key: |
+        -----BEGIN RSA PRIVATE KEY-----
+        ${YOUR_PRIVATE_KEY}
+        -----END RSA PRIVATE KEY-----
